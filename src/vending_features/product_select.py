@@ -2,9 +2,9 @@
 class ProductSelect(object):
     def __init__(self):
         self.product_options = {
-            'cola': 100,
-            'chips': 50,
-            'candy': 65
+            'cola': 1,
+            'chips': .5,
+            'candy': .65
         }
         self.price_needed = 0
         self.product_selected = None

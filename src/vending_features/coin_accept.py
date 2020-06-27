@@ -13,27 +13,26 @@ class CoinAcceptor(object):
         # if the coin is invalid, it is sent to the coin_return function
         if len(coin_inserted) == 4:
             if self.weigh_coin(coin_inserted) == 'deim':
-                self.coin_value += 10
+                self.coin_value += .10
                 self.number_of_coins += 1
         elif len(coin_inserted) == 6:
             if self.weigh_coin(coin_inserted) == 'ceikln':
-                self.coin_value += 5
+                self.coin_value += .05
                 self.number_of_coins += 1
             else:
                 self.coin_return(coin_inserted)
         elif len(coin_inserted) == 7:
             if self.weigh_coin(coin_inserted) == 'aeqrrtu':
-                self.coin_value += 25
+                self.coin_value += .25
                 self.number_of_coins += 1
             else:
                 self.coin_return(coin_inserted)
         else:
             self.coin_return(coin_inserted)
-
-    def coin_display(self) -> str:
-        if self.number_of_coins:
-            return f'{self.coin_value}'
-        return 'Insert Coin'
+    
+    def clear_coins(self):
+        self.coin_value = 0
+        self.number_of_coins = 0
 
     def weigh_coin(self, coin_to_weigh:str) -> str:
         # returns the "weight" of the coin

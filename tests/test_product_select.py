@@ -8,7 +8,7 @@ class ProductSelectTest(unittest.TestCase):
     def test_select_product(self):
         self.product_select.select_product('cola')
         self.assertEqual(self.product_select.product_selected, 'cola')
-        self.assertEqual(self.product_select.price_needed, 100)
+        self.assertEqual(self.product_select.price_needed, 1)
 
     def test_deselect_product(self):
         self.product_select.select_product('cola')
