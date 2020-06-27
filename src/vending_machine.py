@@ -9,6 +9,7 @@ class VendingMachine(object):
         super().__init__()
 
     def is_product_dispensed(self) -> bool:
+        # logic to dispense if product should be dispensed to customer
         if self.product_select.product_selected:
             if self.change_in_machine < 0.05:
                 # if no change in the machince only take exact change
@@ -25,14 +26,17 @@ class VendingMachine(object):
                     return True
                 elif self.product_select.price_needed < self.coin_accept.coin_value:
                     print(f"Dispensing {self.product_select.product_selected[0]}")
-                    return_amount = (self.coin_accept.coin_value - self.product_select.price_needed) / 5
-                    [self.coin_accept.coin_return('nickel') * return_amount]
+                    return_amount = ((self.coin_accept.coin_value - self.product_select.price_needed)*100) / 5
+                    for x in range(return_amount):
+                        self.coin_accept.coin_return('nickel')
+                        self.change_in_machine -= .05
                     self.coin_accept.clear_coins()
                     self.product_select.deselect_product()
                     return True
         return False
 
     def vending_display(self) -> str:
+        # the "display" that the user will see
         if not self.product_select.in_stock:
             self.product_select.deselect_product()
             return "SOLD OUT"

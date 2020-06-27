@@ -19,6 +19,10 @@ class CoinAcceptorTest(unittest.TestCase):
         self.assertEqual(self.coin_accept.return_coins_to_customer(), "quarter sent to Coin Return\nquarter sent to Coin Return"
                                                                       "\ndime sent to Coin Return\nnickel sent to Coin Return")
         
+    def test_coin_return(self):
+        # test sending coins to return for user
+        self.assertEqual(self.coin_accept.coin_return('nickel'), 'nickel sent to Coin Return')
+
 
     def test_accept_coin(self):
         self.coin_accept.accept_coins('quarter')

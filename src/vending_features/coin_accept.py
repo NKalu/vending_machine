@@ -47,6 +47,6 @@ class CoinAcceptor(object):
         # returns the "weight" of the coin
         return ''.join(sorted(coin_to_weigh.lower()))
 
-    def coin_return(self, coin_to_return: str):
+    def coin_return(self, coin_to_return: str) -> str:
         # just prints that a coin has been sent to Coin Return
         return f'{coin_to_return} sent to Coin Return'
