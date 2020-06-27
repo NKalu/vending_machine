@@ -5,18 +5,40 @@ class VendingMachine(object):
     def __init__(self):
         self.coin_accept = CoinAcceptor()
         self.product_select = ProductSelect()
+        self.change_in_machine = 100
         super().__init__()
 
     def is_product_dispensed(self) -> bool:
         if self.product_select.product_selected:
-            if self.product_select.price_needed <= self.coin_accept.coin_value:
-                print(f"Dispensing {self.product_select.product_selected}")
-                self.coin_accept.clear_coins()
-                self.product_select.deselect_product()
-                return True
+            if self.change_in_machine < 0.05:
+                # if no change in the machince only take exact change
+                if self.product_select.price_needed == self.coin_accept.coin_value:
+                    print(f"Dispensing {self.product_select.product_selected[0]}")
+                    self.coin_accept.clear_coins()
+                    self.product_select.deselect_product()
+                    return True
+            else:
+                if self.product_select.price_needed == self.coin_accept.coin_value:
+                    print(f"Dispensing {self.product_select.product_selected[0]}")
+                    self.coin_accept.clear_coins()
+                    self.product_select.deselect_product()
+                    return True
+                elif self.product_select.price_needed < self.coin_accept.coin_value:
+                    print(f"Dispensing {self.product_select.product_selected[0]}")
+                    return_amount = self.coin_accept.coin_value - self.product_select.price_needed
+                    self.coin_accept.clear_coins()
+                    self.product_select.deselect_product()
+                    return True
         return False
 
     def vending_display(self) -> str:
+        if not self.product_select.in_stock:
+            self.product_select.deselect_product()
+            return "SOLD OUT"
+        standard_display = "INSERT COIN"
+        # check to make sure there is enough change to dispense from machine
+        if self.change_in_machine < 0.05:
+            standard_display = "EXACT CHANGE ONLY"
         dispensed = self.is_product_dispensed()
         if dispensed:
             return "THANK YOU"
@@ -26,4 +48,4 @@ class VendingMachine(object):
                     return f"PRICE ${self.product_select.price_needed - self.coin_accept.coin_value:.2f}"
             else:
                 return f"${self.coin_accept.coin_value:.2f}"
-        return "INSERT COIN"
+        return standard_display
