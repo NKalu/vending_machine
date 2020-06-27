@@ -11,6 +11,14 @@ class CoinAcceptorTest(unittest.TestCase):
         self.assertEqual(self.coin_accept.weigh_coin('nickel'), 'ceikln')
         self.assertEqual(self.coin_accept.weigh_coin('quarter'), 'aeqrrtu')
 
+    def test_return_to_customer(self):
+        self.coin_accept.accept_coins('quarter')
+        self.coin_accept.accept_coins('quarter')
+        self.coin_accept.accept_coins('dime')
+        self.coin_accept.accept_coins('nickel')
+        self.assertEqual(self.coin_accept.return_coins_to_customer(), "quarter sent to Coin Return\nquarter sent to Coin Return"
+                                                                      "\ndime sent to Coin Return\nnickel sent to Coin Return")
+        
 
     def test_accept_coin(self):
         self.coin_accept.accept_coins('quarter')
