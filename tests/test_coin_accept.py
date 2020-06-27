@@ -21,6 +21,10 @@ class CoinAcceptorTest(unittest.TestCase):
         self.assertEqual(self.coin_accept.coin_value, 25)
         self.coin_accept.accept_coins('penny')
         self.assertEqual(self.coin_accept.coin_value, 25)
+        self.coin_accept.accept_coins('golden dollar')
+        self.assertEqual(self.coin_accept.coin_value, 25)
+        self.coin_accept.accept_coins('dime')
+        self.assertEqual(self.coin_accept.coin_value, 35)
 
 if __name__ == '__main__':
     unittest.main()
