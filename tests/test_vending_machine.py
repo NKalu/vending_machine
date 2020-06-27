@@ -21,6 +21,15 @@ class VendingMachineTest(unittest.TestCase):
         self.assertEqual(self.vending_machine.vending_display(), "INSERT COIN")
 
 
+    def test_make_change(self):
+        self.vending_machine.coin_accept.accept_coins('quarter')
+        self.vending_machine.coin_accept.accept_coins('quarter')
+        self.vending_machine.coin_accept.accept_coins('quarter')
+        self.vending_machine.coin_accept.accept_coins('quarter')
+        self.vending_machine.product_select.select_product('chips')
+        self.assertEqual(self.vending_machine.vending_display(), '')
+
+
     def test_sold_out(self):
         self.vending_machine.product_select.product_options = {
             'cola': (1, False),

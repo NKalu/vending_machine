@@ -25,7 +25,8 @@ class VendingMachine(object):
                     return True
                 elif self.product_select.price_needed < self.coin_accept.coin_value:
                     print(f"Dispensing {self.product_select.product_selected[0]}")
-                    return_amount = self.coin_accept.coin_value - self.product_select.price_needed
+                    return_amount = (self.coin_accept.coin_value - self.product_select.price_needed) / 5
+                    [self.coin_accept.coin_return('nickel') * return_amount]
                     self.coin_accept.clear_coins()
                     self.product_select.deselect_product()
                     return True
